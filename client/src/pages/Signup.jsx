@@ -8,7 +8,7 @@ const SignUp = () => {
 		username: "",
 		password: "",
 		confirmPassword: "",
-		gender: "",
+		gender: "male",
 	});
 
 	const { loading, signup } = useSignup();
@@ -17,6 +17,7 @@ const SignUp = () => {
 	const handleSignUp = async (e) => {
 		e.preventDefault();
 		await signup(inputs);
+	
 	};
 
 	return (
