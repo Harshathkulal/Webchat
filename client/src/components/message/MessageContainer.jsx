@@ -1,48 +1,32 @@
-import { useEffect } from "react";
 import useConversation from "../../zustand/useConversation";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
-import { TiMessages } from "react-icons/ti";
-import { useAuthContext } from "../../context/AuthContext";
+import { IoArrowBack } from "react-icons/io5";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
 
-  useEffect(() => {
-    // cleanup function (unmounts)
-    return () => setSelectedConversation(null);
-  }, [setSelectedConversation]);
-
-  const NoChatSelected = () => {
-    const { authUser } = useAuthContext();
-    return (
-      <div className="flex items-center justify-center w-full h-full">
-        <div className="px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2">
-          <p>Welcome 👋 {authUser.fullName} ❄</p>
-          <p>Select a chat to start messaging</p>
-          <TiMessages className="text-3xl md:text-6xl text-center" />
-        </div>
-      </div>
-    );
+  const clickback = () => {
+    setSelectedConversation(null);
   };
 
   return (
-    <div className="md:min-w-[450px] flex flex-col bg-slate-500">
-      {!selectedConversation ? (
-        <NoChatSelected />
-      ) : (
-        <>
-          {/* Header */}
-          <div className="bg-slate-500 px-4 py-2 mb-2">
-            <span className="label-text">To:</span>{" "}
-            <span className="text-gray-900 font-bold">
-              {selectedConversation.fullName}
-            </span>
-          </div>
-          <Messages />
-          <MessageInput />
-        </>
-      )}
+    <div className="flex flex-col bg-slate-500 flex-1">
+      <div className="flex p-2 bg-slate-900 sticky top-0 z-20 justify-between items-center">
+        <div className="cursor-pointer" onClick={clickback}><IoArrowBack size={24}/></div>
+        <div className="flex gap-2 items-center ">
+        <div className="w-10 rounded-full">
+          <img src={selectedConversation.profilePic} alt="user avatar" />
+        </div>
+        <p className="font-bold text-white truncate">
+          {selectedConversation.fullName}
+        </p>
+        </div>
+        <BsThreeDotsVertical size={24} />
+      </div>
+      <Messages />
+      <MessageInput />
     </div>
   );
 };
