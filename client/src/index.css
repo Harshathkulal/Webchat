@@ -5,3 +5,9 @@
 body{
     background-color: black;
 }
+
+.transition {
+    transition-property: width, margin;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }

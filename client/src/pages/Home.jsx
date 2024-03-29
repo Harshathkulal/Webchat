@@ -1,25 +1,22 @@
-import MessageContainer from "../components/message/MessageContainer";
+
+import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import { useState } from "react";
+import MessageContainer from "../components/message/MessageContainer";
+import useConversation from "../zustand/useConversation";
 
 const Home = () => {
-  // State to manage navigation
-  const [showMessageContainer, setShowMessageContainer] = useState(false);
-
-  // Handler function to toggle the message container visibility
-  const toggleMessageContainer = () => {
-    setShowMessageContainer(!showMessageContainer);
-  };
-
+ const { selectedConversation } = useConversation();
+console.log(selectedConversation)
   return (
-    <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-      {/* Pass the toggle function as a prop to Sidebar */}
-      <Sidebar toggleMessageContainer={toggleMessageContainer} />
+    <div className="flex flex-col w-full h-screen  sm:w-[380px] sm:h-[640px] rounded-lg overflow-auto bg-slate-800 ">
       
-      {/* Conditionally render MessageContainer based on the state */}
-      {showMessageContainer && <MessageContainer />}
-    </div>
+      {!selectedConversation ? (
+        <Sidebar/>
+      ) : (
+        <MessageContainer/>)}
+    </div>    
   );
 };
-
 export default Home;
+
+
