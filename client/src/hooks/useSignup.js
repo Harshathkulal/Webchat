@@ -25,7 +25,8 @@ const useSignup = () => {
 			localStorage.setItem("chat-user", JSON.stringify(data));
 			setAuthUser(data);
 		} catch (error) {
-			toast.error(error.message);
+			toast.error(error.message,{
+				duration: 1000,});
 		} finally {
 			setLoading(false);
 		}
@@ -37,17 +38,20 @@ export default useSignup;
 
 function handleInputErrors({ fullName, username, password, confirmPassword, gender }) {
 	if (!fullName || !username || !password || !confirmPassword || !gender) {
-		toast.error("Please fill in all fields");
+		toast.error("Please fill in all fields",{
+			duration: 1000,});
 		return false;
 	}
 
 	if (password !== confirmPassword) {
-		toast.error("Passwords do not match");
+		toast.error("Passwords do not match",{
+			duration: 1000,});
 		return false;
 	}
 
 	if (password.length < 6) {
-		toast.error("Password must be at least 6 characters");
+		toast.error("Password must be at least 6 characters",{
+			duration: 1000,});
 		return false;
 	}
 
