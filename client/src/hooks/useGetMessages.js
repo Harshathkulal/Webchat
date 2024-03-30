@@ -15,7 +15,8 @@ const useGetMessages = () => {
 				if (data.error) throw new Error(data.error);
 				setMessages(data);
 			} catch (error) {
-				toast.error(error.message);
+				toast.error(error.message,{
+					duration: 1000,});
 			} finally {
 				setLoading(false);
 			}
