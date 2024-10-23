@@ -14,8 +14,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex  w-full h-screen  sm:w-[380px] sm:h-[640px]  overflow-auto bg-slate-800 justify-center">
-      <div className="flex flex-col w-full p-6 shadow-md bg-gradient-to-l from-sky-950 to-slate-900 text-white pt-24">
+    <div className="flex  w-full h-screen  overflow-auto bg-slate-800 justify-center">
+      <div className="flex flex-col w-full p-6 shadow-md bg-gradient-to-l from-sky-950 to-slate-900 text-white pt-24 max-w-lg">
         <h1 className="text-3xl font-semibold text-center text-gray-300">
           <span className="text-blue-500 "> WebChat</span> Login
         </h1>
