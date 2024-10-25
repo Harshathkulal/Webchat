@@ -8,16 +8,28 @@ const MessageInput = () => {
   const textareaRef = useRef(null);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!message) return;
-    await sendMessage(message);
-    setMessage("");
-    resetTextareaHeight();
+    e.preventDefault(); // Prevent default form submission
+    if (!message) return; // Don't send empty messages
+
+    try {
+      await sendMessage(message); // Attempt to send the message
+      setMessage(""); // Clear message input
+      resetTextareaHeight(); // Reset textarea height
+    } catch (error) {
+      console.error("Error sending message:", error); // Log error for debugging
+      // Optionally, display an error notification here
+    }
   };
 
   const handleInputChange = (e) => {
     setMessage(e.target.value);
     autoAdjustTextareaHeight();
+
+    // Check for Enter key press and call handleSubmit
+    if (e.key === "Enter" && !e.shiftKey) { // Allow Shift+Enter for new lines
+      e.preventDefault(); // Prevent default newline behavior
+      handleSubmit(e); // Call handleSubmit
+    }
   };
 
   const autoAdjustTextareaHeight = () => {
@@ -42,6 +54,7 @@ const MessageInput = () => {
           placeholder="Send a message"
           value={message}
           onChange={handleInputChange}
+          onKeyDown={handleInputChange} // Handle keydown events for Enter
           rows={1} // Start with one row
           style={{ minHeight: "2.5rem" }}
         />
@@ -61,3 +74,4 @@ const MessageInput = () => {
 };
 
 export default MessageInput;
+
